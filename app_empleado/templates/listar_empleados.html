@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block titulo %}Empleados | Melodías{% endblock %}
+
+{% block contenido %}
+<div class="page-header">
+    <h2>Empleados Registrados</h2>
+    <a href="{% url 'app_empleado:crear_empleado' %}" class="btn btn-primary">+ Agregar Empleado</a>
+</div>
+
+<ul class="artist-grid">
+    {% for empleado in empleados %}
+    <li class="artist-card">
+        <a href="{% url 'app_empleado:detalle_empleado' empleado.id %}">
+            {% if empleado.foto_empleado %}
+                <img src="{{ empleado.foto_empleado.url }}" alt="Foto de {{ empleado.nombre_emp }}" class="artist-img">
+            {% else %}
+                <div class="artist-placeholder">🎵</div>
+            {% endif %}
+            <h3>{{ empleado.nombres_emp }}</h3>
+            <p class="artist-nationality">{{ empleado.nombres_emp }}</p>
+            <p class="artist-nationality">{{ empleado.ap_p_emp }}</p>
+            <p class="artist-nationality">{{ empleado.ap_m_emp }}</p>
+            <p class="artist-nationality">{{ empleado.correo_emp }}</p>
+            <p class="artist-nationality">{{ empleado.puesto_emp }}</p>
+            <p class="artist-nationality">{{ empleado.proyectos_emp }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="no-artists">No hay empleados registrados.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

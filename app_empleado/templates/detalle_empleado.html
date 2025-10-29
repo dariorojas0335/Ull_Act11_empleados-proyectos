@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ empleado.nombre }} | Melodías{% endblock %}
+
+{% block contenido %}
+<article class="artist-detail">
+    <div class="artist-banner">
+        {% if empleado.foto_empleado %}
+            <img src="{{ empleado.foto_empleado.url }}" alt="Foto de {{ empleado.nombre }}" class="detail-photo">
+        {% else %}
+            <div class="detail-placeholder">👤</div>
+        {% endif %}
+        <div class="artist-info">
+            <h1>{{ empleado.nombre }}</h1>
+            <h3>{{ empleado.nacionalidad }}</h3>
+        </div>
+    </div>
+
+    <div class="detail-actions">
+        <a href="{% url 'app_empleado:editar_empleado' empleado.id %}" class="btn btn-secondary">✏️ Editar</a>
+        <a href="{% url 'app_empleado:borrar_empleado' empleado.id %}" class="btn btn-danger">🗑️ Borrar</a>
+    </div>
+
+    <section class="songs-section">
+        <h2>Proyectos</h2>
+        {% if empleado.proyectos.all %}
+        <ul class="song-list">
+            {% for proyecto in empleado.proyectos.all %}
+            <li>{{ proyecto.titulo }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-message">Este empleado no tiene proyectos registradas.</p>
+        {% endif %}
+    </section>
+</article>
+{% endblock %}
