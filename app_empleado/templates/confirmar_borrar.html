@@ -2,7 +2,7 @@
 {% block titulo %}Eliminar Empleado | Melodías{% endblock %}
 
 {% block contenido %}
-<h2>¿Estás seguro de que quieres borrar a "{{ empleado.nombre }}"?</h2>
+<h2>¿Estás seguro de que quieres borrar a "{{ empleado.nombres_emp }}"?</h2>
 <p>Esta acción no se puede deshacer.</p>
 <form method="post">
     {% csrf_token %}
